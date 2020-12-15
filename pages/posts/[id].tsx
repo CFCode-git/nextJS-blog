@@ -41,7 +41,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (staticContext: any) => {
   const id = staticContext.params.id;
   const post = await getPost(id);
-  console.log(post);
   return {
     props: {
       post: post
