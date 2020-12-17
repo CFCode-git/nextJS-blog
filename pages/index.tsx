@@ -1,8 +1,10 @@
 // import png from 'assets/images/1.png'
 import {GetServerSideProps, NextPage} from 'next';
 import React, {useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
 import {UAParser} from 'ua-parser-js';
+import {getDatabaseConnection} from '../lib/getDatabaseConnection';
+
+console.log('执行了 index.tsx');
 
 type Props = {
   browser: {
@@ -30,6 +32,8 @@ const index: NextPage<Props> = (props) => {
 export default index;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const connection = await getDatabaseConnection();
+  console.log('connect.');
   const ua = context.req.headers['user-agent'];
   const result = new UAParser(ua).getResult();
   return {
