@@ -1,6 +1,8 @@
 import React from 'react';
 import {getPost, getPostIds} from '../../lib/posts';
-import {NextPage} from 'next';
+import {GetServerSideProps, NextPage} from 'next';
+import {getDatabaseConnection} from '../../lib/getDatabaseConnection';
+import {Post} from '../../src/entity/Post';
 
 type Props = {
   post: Post
@@ -11,7 +13,7 @@ const postsShow: NextPage<Props> = (props) => {
   return (
     <div>
       <h1>{post.title}</h1>
-      <article dangerouslySetInnerHTML={ {__html:post.htmlContent} }>
+      <article dangerouslySetInnerHTML={{__html: post.content}}>
       </article>
     </div>
   );
@@ -19,31 +21,13 @@ const postsShow: NextPage<Props> = (props) => {
 
 export default postsShow;
 
-// 获取 id，穷举，知道id才能生成页面
-export const getStaticPaths = async () => {
-  const idList = await getPostIds();
-  return {
-    paths: idList.map(id => ({params: {id: id}})),
-    // id 列表
-    // paths: [
-    //   {
-    //     params: {id: '第一篇博客'}
-    //   },
-    //   {
-    //     params: {id: '第二篇博客'}
-    //   }
-    // ],
-    fallback: false
-  };
-};
-
-// SSG
-export const getStaticProps = async (staticContext: any) => {
-  const id = staticContext.params.id;
-  const post = await getPost(id);
+export const getServerSideProps: GetServerSideProps<any, { id: string }> = async (context) => {
+  // const postId = context.params.id;
+  const connection = await getDatabaseConnection();
+  const post = await connection.manager.findOne(Post, context.params.id);
   return {
     props: {
-      post: post
+      post: JSON.parse(JSON.stringify(post))
     }
   };
 };

@@ -1,9 +1,9 @@
 // import png from 'assets/images/1.png'
 import {GetServerSideProps, NextPage} from 'next';
-import React, {useEffect, useState} from 'react';
-import {UAParser} from 'ua-parser-js';
+import React from 'react';
 import {getDatabaseConnection} from '../lib/getDatabaseConnection';
 import {Post} from '../src/entity/Post';
+import Link from 'next/link';
 
 console.log('执行了 index.tsx');
 
@@ -16,7 +16,11 @@ const index: NextPage<Props> = (props) => {
   console.log(posts);
   return (
     <div>
-      {posts.map(post=><div key={post.id}>{post.title}</div>)}
+      <h1>文章列表</h1>
+      {posts.map(post => <Link href="/posts/[id]" as={`/posts/${post.id}`} key={post.id}>
+          <a> {post.title} </a>
+        </Link>
+      )}
     </div>
   );
 };
