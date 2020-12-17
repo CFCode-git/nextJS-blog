@@ -25,5 +25,6 @@ createConnection().then(async connection => {
   console.log(p1.id);
   console.log(u1.id);
   await connection.close();
+  console.log('OK!');
 }).catch(error => console.log(error));
 
