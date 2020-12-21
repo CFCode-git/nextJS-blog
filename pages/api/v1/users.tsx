@@ -5,6 +5,7 @@ import md5 from 'md5';
 
 const Users: NextApiHandler = async (req, res) => {
   const {username, password, passwordConfirmation} = req.body;
+  const connection = await getDatabaseConnection(); // 第一次连接不能用 get
 
   // 表单验证
   const errors = {
@@ -25,6 +26,10 @@ const Users: NextApiHandler = async (req, res) => {
   if (username.trim().length < 3) {
     errors.username.push('太短');
   }
+  const found = connection.manager.find('User', {username});
+  if (found) {
+    errors.username.push('用户名已存在')
+  }
   if (password === '') {
     errors.password.push('不能为空');
   }
@@ -38,7 +43,6 @@ const Users: NextApiHandler = async (req, res) => {
     res.write(JSON.stringify(errors));
   } else {
     // 连接数据库 创建用户
-    const connection = await getDatabaseConnection(); // 第一次连接不能用 get
     const user = new User();
     user.username = username.trim();
     user.passwordDigest = md5(password);

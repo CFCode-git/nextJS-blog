@@ -1,6 +1,6 @@
 import {NextPage} from 'next';
 import React, {useCallback, useState} from 'react';
-import axios, {AxiosError, AxiosResponse} from 'axios';
+import axios, {AxiosResponse} from 'axios';
 
 const Sign_up: NextPage = () => {
 
