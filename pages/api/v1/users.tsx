@@ -8,10 +8,6 @@ const Users: NextApiHandler = async (req, res) => {
   const connection = await getDatabaseConnection(); // 第一次连接不能用 get
 
   const user = new User();
-  console.log('========');
-  console.log(passwordConfirmation);
-  console.log(password);
-  console.log('========');
   user.username = username.trim();
   user.password = password;
   user.passwordConfirmation = passwordConfirmation;
