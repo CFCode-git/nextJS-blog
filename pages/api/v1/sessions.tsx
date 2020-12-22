@@ -1,8 +1,11 @@
 import {NextApiHandler} from 'next';
 import {SignIn} from '../../../src/model/SignIn';
+import {withSession} from '../../../lib/withSession';
 
 const Sessions: NextApiHandler = async (req, res) => {
   const {username, password} = req.body;
+  // @ts-ignore
+  console.log(req.session);
   res.setHeader('Content-Type', 'application/json;charset=utf-8');
   const signIn = new SignIn();
   signIn.username = username;
@@ -17,4 +20,4 @@ const Sessions: NextApiHandler = async (req, res) => {
   }
 };
 
-export default Sessions;
+export default withSession(Sessions);
