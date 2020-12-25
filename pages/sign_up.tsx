@@ -1,7 +1,6 @@
 import {NextPage} from 'next';
 import React, {useCallback, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
-import Form from '../components/Form';
 import {useForm} from '../Hooks/useForm';
 
 const SignUp: NextPage = () => {

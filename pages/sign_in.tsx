@@ -3,7 +3,6 @@ import React, {useCallback, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import {withSession} from '../lib/withSession';
 import {User} from '../src/entity/User';
-import Form from '../components/Form';
 import {useForm} from '../Hooks/useForm';
 
 const SignIn: NextPage<{ user: User }> = (props) => {
