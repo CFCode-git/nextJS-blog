@@ -2,18 +2,12 @@ import {NextPage} from 'next';
 import React, {useCallback, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import Form from '../components/Form';
+import {useForm} from '../Hooks/useForm';
 
 const SignUp: NextPage = () => {
 
-  const [formData, setFormData] = useState({
-    username: '', password: '', passwordConfirmation: '',
-  });
-  const [errors, setErrors] = useState({
-    username: [], password: [], passwordConfirmation: [],
-  });
-
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
+  const initFormData = {username: '', password: '', passwordConfirmation: '',};
+  const onSubmit = (formData: typeof initFormData) => {
     axios.post(`/api/v1/users`, formData)
       .then(() => {
         window.alert(`${formData.username}注册成功`);
@@ -22,52 +16,25 @@ const SignUp: NextPage = () => {
         if (error.response) {
           const response: AxiosResponse = error.response;
           if (response.status === 422) {
-            console.log('response.data');
-            console.log(response.data);
             setErrors({...response.data});
           }
         }
       });
-  }, [formData]);
+  };
 
-  const onChange = useCallback((key, value) => {
-    setFormData({...formData, [key]: value});
-  }, [formData]);
+  const {form, setErrors} = useForm({
+    initFormData,
+    fields: [
+      {label: '用户名', type: 'text', key: 'username'},
+      {label: '密码', type: 'password', key: 'password'},
+      {label: '确认密码', type: 'password', key: 'passwordConfirmation',},
+    ],
+    buttons: <button type="submit">登录</button>,
+    onSubmit,
+  });
 
-  return (
-    <>
-      <h1>注册</h1>
-      <Form
-        fields={[
-          {
-            label: '用户名',
-            type: 'text',
-            value: formData.username,
-            onChange: e => onChange('username', e.target.value),
-            errors: errors.username
-          },
-          {
-            label: '密码',
-            type: 'password',
-            value: formData.password,
-            onChange: e => onChange('password', e.target.value),
-            errors: errors.password
-          },
-          {
-            label: '确认密码',
-            type: 'password',
-            value: formData.passwordConfirmation,
-            onChange: e => onChange('passwordConfirmation', e.target.value),
-            errors: errors.passwordConfirmation
-          },
-        ]}
-        onSubmit={onSubmit}
-        buttons={<>
-          <button type="submit">登录</button>
-        </>}
-      />
-    </>
-  );
+
+  return (form);
 };
 
 export default SignUp;
