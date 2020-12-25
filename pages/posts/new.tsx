@@ -18,16 +18,15 @@ const PostsNew: NextPage = () => {
       });
   };
   const initFormData = {title: '', content: ''};
-  const {form, setErrors} = useForm(
+  const {form, setErrors} = useForm({
     initFormData,
-    [
+    fields: [
       {label: '标题', type: 'text', key: 'title'},
       {label: '内容', type: 'textarea', key: 'content'}
     ],
-    <button type='submit'>提交</button>,
+    buttons: <button type='submit'>提交</button>,
     onSubmit,
-  );
-  // const {form} = useForm();
+  });
   return (
     <div> {form} </div>
   );

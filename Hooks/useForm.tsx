@@ -15,10 +15,10 @@ type useFormOptions<T> = {
 
 
 export function useForm<T>(options: useFormOptions<T>) {
-// export function useForm() {
   const {initFormData, fields, buttons, onSubmit} = options;
   // 非受控
   const [formData, setFormData] = useState(initFormData);
+
   const [errors, setErrors] = useState(() => {
     const e: { [k in keyof T]?: string[] } = {};
     for (let key in initFormData) {
@@ -28,21 +28,26 @@ export function useForm<T>(options: useFormOptions<T>) {
     }
     return e;
   });
+
   const onChange = useCallback((key: keyof T, value: any) => {
     setFormData({...formData, [key]: value});
   }, [formData]);
+
   const _onSubmit = useCallback((e) => {
     e.preventDefault();
     onSubmit(formData);
   }, [onSubmit, formData]);
+
   const form = (
     <form onSubmit={_onSubmit}>
       {fields.map(field =>
-        <div>
+        <div key={field.label}>
           <label>{field.label}
             {field.type === 'textarea' ?
-              <textarea onChange={(e) => onChange(field.key, e.target.value)}>
-                {formData[field.key]}
+              <textarea
+                value={formData[field.key].toString()}
+                onChange={(e) => onChange(field.key, e.target.value)}
+              >
               </textarea>
               :
               <input type={field.type} value={formData[field.key].toString()}
@@ -62,7 +67,4 @@ export function useForm<T>(options: useFormOptions<T>) {
   return {
     form: form, setErrors: setErrors
   };
-  // const [a, setA] = useState('a');
-  // const form = (<div>{a}</div>);
-  // return {form};
 }
