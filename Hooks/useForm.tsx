@@ -12,7 +12,7 @@ type useFormOptions<T> = {
   fields: Field<T>[];
   buttons: ReactChild;
   submit: {
-    request: (formData: T) => Promise<T>;
+    request: (formData: T) => Promise<AxiosResponse<T>>;
     message: string
   }
 }

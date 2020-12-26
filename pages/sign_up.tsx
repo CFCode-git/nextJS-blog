@@ -17,7 +17,6 @@ const SignUp: NextPage = () => {
     submit: {
       request(formData){
         return axios.post(`/api/v1/users`, formData)
-          .then(response => response.data);
       },
       message: '提交成功'
     }
