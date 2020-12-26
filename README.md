@@ -39,3 +39,8 @@ CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYP
 yarn m:run
 node dist/seed.js
 ```
+
+### yarn m:run 出错解决方法
+
+由于 entity/user.ts 中验证 username 唯一性用到了 getDatabaseConnection, 在当数据库还没有创建的时候会报错,因此可以先删除相关代码
+创建数据库执行 m:run 后再复原
