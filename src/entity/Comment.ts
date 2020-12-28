@@ -12,8 +12,8 @@ export class Comment {
   createdAt: Date;
   @UpdateDateColumn()
   updatedAt: Date;
-  @ManyToOne(type => User, user => user.comments)
-  user: User;
-  @ManyToOne(type => Post, post => post.comments)
-  post: Post;
+  // @ManyToOne(type => User, user => user.comments)
+  // user: User;
+  // @ManyToOne(type => Post, post => post.comments)
+  // post: Post;
 }
