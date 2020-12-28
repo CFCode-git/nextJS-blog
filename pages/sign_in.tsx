@@ -1,9 +1,10 @@
 import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next';
-import React, {useCallback, useState} from 'react';
-import axios, {AxiosResponse} from 'axios';
+import React from 'react';
+import axios from 'axios';
 import {withSession} from '../lib/withSession';
 import {User} from '../src/entity/User';
 import {useForm} from '../Hooks/useForm';
+import qs from 'query-string';
 
 const SignIn: NextPage<{ user: User }> = (props) => {
 
@@ -18,7 +19,11 @@ const SignIn: NextPage<{ user: User }> = (props) => {
       request(formData) {
         return axios.post(`/api/v1/sessions`, formData);
       },
-      message: '登录成功'
+      success: () => {
+        window.alert('登录成功');
+        const query = qs.parse(window.location.search);
+        window.location.href = query.return_to.toString();
+      }
     }
   });
 

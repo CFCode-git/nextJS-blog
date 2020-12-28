@@ -15,7 +15,10 @@ const PostsNew: NextPage = () => {
       request(formData) {
         return axios.post(`/api/v1/posts`, formData);
       },
-      message: '提交成功',
+      success: () => {
+        window.alert('提交成功');
+        window.location.href = '/posts';
+      }
     }
   });
   return (
