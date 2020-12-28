@@ -32,9 +32,10 @@ export const getServerSideProps: GetServerSideProps = withSession(
   async (context: GetServerSidePropsContext) => {
     // @ts-ignore
     const user = context.req.session.get('currentUser');
+
     return {
       props: {
-        user: JSON.parse(JSON.stringify(user))
+        user: JSON.parse(JSON.stringify(user || ''))
       }
     };
   });
