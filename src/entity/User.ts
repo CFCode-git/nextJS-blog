@@ -25,10 +25,10 @@ export class User {
   createdAt: Date;
   @UpdateDateColumn()
   updatedAt: Date;
-  @OneToMany(type => Post, post => post.author)
+  @OneToMany('Post', 'author')
   @JoinColumn()
   posts: Post[];
-  @OneToMany(type => Comment, comment => comment.user)
+  @OneToMany('Comment', 'user')
   @JoinColumn()
   comments: Comment[];
 

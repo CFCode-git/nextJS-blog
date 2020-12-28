@@ -12,7 +12,7 @@ const Posts: NextApiHandler = withSession(async (req, res) => {
     post.content = content;
     const connection = await getDatabaseConnection();
     const user = req.session.get('currentUser');
-    post.authorId = user.id;
+    post.author = user.id;
     await connection.manager.save(post);
     res.json(post);
   }

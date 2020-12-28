@@ -22,10 +22,8 @@ export class Post {
   createdAt: Date;
   @UpdateDateColumn()
   updatedAt: Date;
-  // @ManyToOne(type => User, user => user.posts)
-  // author: User;
-  @Column('int')
-  authorId:number;
+  @ManyToOne('User', 'posts')
+  author: User;
   @OneToMany(type => Comment, comment => comment.post)
   comments:Comment[]
 }
