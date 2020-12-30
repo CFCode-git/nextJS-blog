@@ -3,10 +3,8 @@ import Link from 'next/link'
 import Head from 'next/head'
 import styles from 'styles/first-post.module.css'
 
-console.log('执行了')
 export default function FirstPost() {
   const clickMe = useCallback(() => {
-    console.log('you clicked me')
   }, [])
   return (
     <React.Fragment>

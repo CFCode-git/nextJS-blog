@@ -43,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = qs.parse(search); // 得到query对象 {page:'1'}
   const page = parseInt(query.page?.toString()) || 1;
   const connection = await getDatabaseConnection();
-  const perPage = 1;
+  const perPage = 10;
   const [posts, count] = await connection.manager.findAndCount(Post, {skip: (page - 1) * perPage, take: perPage});
 
   return {
