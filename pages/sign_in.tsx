@@ -4,7 +4,7 @@ import axios from 'axios';
 import {withSession} from '../lib/withSession';
 import {User} from '../src/entity/User';
 import {useForm} from '../Hooks/useForm';
-import qs from 'query-string';
+import qs from 'querystring';
 
 const SignIn: NextPage<{ user: User }> = (props) => {
 
@@ -21,7 +21,7 @@ const SignIn: NextPage<{ user: User }> = (props) => {
       },
       success: () => {
         window.alert('登录成功');
-        const query = qs.parse(window.location.search);
+        const query = qs.parse(window.location.search.substr(1)); /* 是一个对象 {return_to:'posts/new'}*/
         window.location.href = query.return_to.toString();
       }
     }

@@ -4,25 +4,35 @@ import React from 'react';
 import {getDatabaseConnection} from 'lib/getDatabaseConnection';
 import {Post} from 'src/entity/Post';
 import Link from 'next/link';
+import qs from 'querystring';
 
-console.log('执行了 index.tsx');
 
 type Props = {
-  posts: Post[]
+  posts: Post[],
+  count: number,
+  perPage: number,
+  page:number
 }
 const PostsIndex: NextPage<Props> = (props) => {
   const {posts} = props;
-  console.log('posts');
-  console.log(posts);
   return (
     <div>
       <h1>文章列表</h1>
-      {posts.map(post => <div>
-          <Link href="/posts/[id]" as={`/posts/${post.id}`} key={post.id}>
+      {posts.map(post => <div key={post.id}>
+          <Link href="/posts/[id]" as={`/posts/${post.id}`}>
             <a> {post.title} </a>
           </Link>
         </div>
       )}
+      <footer>
+        共 {props.count} 篇文章, 当前是第 {props.page} 页
+        <Link href={`?page=${props.page - 1}`}>
+          <a>上一页</a>
+        </Link>
+        <Link href={`?page=${props.page + 1}`}>
+          <a>下一页</a>
+        </Link>
+      </footer>
     </div>
   );
 };
@@ -30,11 +40,19 @@ const PostsIndex: NextPage<Props> = (props) => {
 export default PostsIndex;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const index = context.req.url.indexOf('?'); // ?的index
+  const search = context.req.url.substr(index + 1);
+  const query = qs.parse(search); // 得到query对象 {page:'1'}
+  const page = parseInt(query.page?.toString()) || 1;
   const connection = await getDatabaseConnection();
-  const posts = await connection.manager.find(Post);
+  const perPage = 3;
+  const [posts, count] = await connection.manager.findAndCount(Post, {skip: (page - 1) * perPage, take: perPage});
   return {
     props: {
-      posts: JSON.parse(JSON.stringify(posts))
+      posts: JSON.parse(JSON.stringify(posts)),
+      count: count,
+      perPage,
+      page
     }
   };
 };
