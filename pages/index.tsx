@@ -13,11 +13,15 @@ const Home:NextPage = ()=>{
       </div>
       <style jsx>{`
         .cover{
-          height: 100vh;
+          height:100vh;
           display: flex;
           justify-content: center;
           align-items: center;
           flex-direction:column;
+        }
+        img{
+          width:50%;
+          padding-bottom:40px;
         }
       `}</style>
     </>
