@@ -20,7 +20,7 @@ const Home:NextPage = ()=>{
           flex-direction:column;
         }
         img{
-          width:50%;
+          height:120px;
           padding-bottom:40px;
         }
       `}</style>

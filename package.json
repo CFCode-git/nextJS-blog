@@ -24,6 +24,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "reflect-metadata": "^0.1.13",
+    "sass": "^1.32.0",
     "typeorm": "^0.2.29",
     "ua-parser-js": "^0.7.21"
   },

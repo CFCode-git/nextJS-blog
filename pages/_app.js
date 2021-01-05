@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import 'styles/global.css'
+import 'styles/global.scss'
 
 export default function App({Component,pageProps}){
   return <>
