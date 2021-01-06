@@ -21,7 +21,7 @@ type useFormOptions<T> = {
 
 
 export function useForm<T>(options: useFormOptions<T>) {
-  const {initFormData, fields, buttons, submit,labelWidth} = options;
+  const {initFormData, fields, buttons, submit} = options;
   // 非受控
   const [formData, setFormData] = useState(initFormData);
 
