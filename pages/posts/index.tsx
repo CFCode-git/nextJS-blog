@@ -20,7 +20,6 @@ type Props = {
 
 const PostsIndex: NextPage<Props> = (props) => {
   const {currentUser,posts, count, page, totalPage} = props;
-  console.log(currentUser);
   const {pager} = usePager({page, totalPage});
   return (
     <>
