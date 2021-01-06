@@ -23,11 +23,10 @@ const PostsEdit: NextPage<Props> = (props) => {
     </div>,
     submit: {
       request(formData) {
-        return axios.patch(`/api/v1/posts/${id}`, formData);
+        return axios.patch(`/api/v1/posts/${id}`,{...formData,id});
       },
       success: () => {
         window.alert('提交成功');
-        window.location.href = '/posts';
       }
     }
   });
