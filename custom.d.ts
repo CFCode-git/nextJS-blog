@@ -1,4 +1,6 @@
-
+type User = {
+  id:string
+}
 type Post = {
   id: string,
   date: string,
