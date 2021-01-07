@@ -17,7 +17,7 @@ const Posts: NextApiHandler = withSession(async (req, res) => {
       res.end();
       return;
     }
-    post.author = user.id;
+    post.author = user;
     await connection.manager.save(post);
     res.json(post);
   }
