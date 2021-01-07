@@ -20,6 +20,10 @@ const Home:NextPage = ()=>{
           align-items: center;
           flex-direction:column;
         }
+        img{
+          height:120px;
+          padding-bottom:40px;
+        }
       `}</style>
     </>
   )
