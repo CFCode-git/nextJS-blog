@@ -9,7 +9,7 @@ const create = async () => {
   // @ts-ignore
   return createConnection({
     ...config,
-    host: process.env.NODE_ENV === 'production' ? 'location' : config.host,
+    // host: process.env.NODE_ENV === 'production' ? 'location' : config.host,
     // database: process.env.NODE_ENV === 'production' ? 'blog_production' : 'blog_development',
     entities: [Post, User, Comment]
   });
