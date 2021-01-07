@@ -11,7 +11,6 @@ type Props = {
 
 const PostsEdit: NextPage<Props> = (props) => {
   const {post, id} = props;
-  console.log('post',post);
   const {form} = useForm({
     initFormData: {title: post.title, content: post.content},
     fields: [
