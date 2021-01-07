@@ -20,7 +20,7 @@ const postsShow: NextPage<Props> = (props) => {
           <h1>{post.title}</h1>
           {currentUser &&
           <p>
-            <Link href="/posts/[id]/edit" as={`posts/${post.id}/edit`}><a>编辑</a></Link>
+            <Link href="/posts/[id]/edit" as={`/posts/${post.id}/edit`}><a>编辑</a></Link>
           </p>
           }
         </header>
