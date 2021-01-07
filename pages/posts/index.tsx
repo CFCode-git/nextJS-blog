@@ -20,18 +20,39 @@ const PostsIndex: NextPage<Props> = (props) => {
   const {posts, count, page, totalPage} = props;
   const {pager} = usePager({page, totalPage});
   return (
-    <div>
-      <h1>文章列表</h1>
-      {posts.map(post => <div key={post.id}>
-          <Link href="/posts/[id]" as={`/posts/${post.id}`}>
-            <a> {post.title} </a>
-          </Link>
-        </div>
-      )}
-      <footer>
-        {pager}
-      </footer>
+    <>
+      <div className="posts">
+        <h1>文章列表</h1>
+        {posts.map(post => <div className="onePost" key={post.id}>
+            <Link href="/posts/[id]" as={`/posts/${post.id}`}>
+              <a> {post.title} </a>
+            </Link>
+          </div>
+        )}
+        <footer>
+          {pager}
+        </footer>
     </div>
+      <style jsx>{`
+        .posts{
+          max-width: 800px;
+          margin:0 auto;
+          padding:16px;
+        }
+        .onePost{
+          border-bottom: 1px solid #ddd;
+          padding:8px 0;
+          cursor: pointer;
+        }
+        .onePost > a{
+          border-bottom: none;
+          color:#000;
+        }
+        .onePost:hover > a{
+          color:#00adb5;
+        } 
+      `}</style>
+    </>
   );
 };
 

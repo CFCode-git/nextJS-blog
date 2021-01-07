@@ -28,34 +28,36 @@ export const usePager = (options: Options) => {
     , []);
 
 
-  const pager = (
-    <div className="wrapper">
-      {page !== 1 && <Link href={urlMaker(page - 1)}>
-        <a>上一页</a>
-      </Link>}
+  const pager = totalPage > 1 ?
+    (
+      <div className="wrapper">
+        {page !== 1 && <Link href={urlMaker(page - 1)}>
+          <a>上一页</a>
+        </Link>}
 
-      {pageNumbers.map(n => n === -1 ?
-        <span key={n}>...</span> :
-        <Link key={n} href={urlMaker(n)}><a>{n}</a></Link>)}
+        {pageNumbers.map(n => n === -1 ?
+          <span key={n}>...</span> :
+          <Link key={n} href={urlMaker(n)}><a>{n}</a></Link>)}
 
-      {page < totalPage && <Link href={urlMaker(page + 1)}>
+        {page < totalPage && <Link href={urlMaker(page + 1)}>
         <a>下一页</a>
       </Link>}
       <span>
       第 {page} / {totalPage} 页
       </span>
 
-      <style jsx>{`
+        <style jsx>{`
         .wrapper{
           margin: 0 -8px;
+          padding:8px 0;
         }
         .wrapper > a, .wrapper > span{
           margin: 0 8px;
         }
       `}</style>
-
-    </div>
-  );
+      </div>
+    ) :
+    null;
 
   return {
     pager
