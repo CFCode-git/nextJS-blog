@@ -22,7 +22,7 @@ const SignIn: NextPage<{ user: User }> = (props) => {
       success: () => {
         window.alert('登录成功');
         const query = qs.parse(window.location.search.substr(1)); /* 是一个对象 {return_to:'posts/new'}*/
-        window.location.href = query.return_to.toString();
+        window.location.href = query.return_to ? query.return_to.toString() : '/posts';
       }
     }
   });
