@@ -44,3 +44,25 @@ node dist/seed.js
 
 由于 entity/user.ts 中验证 username 唯一性用到了 getDatabaseConnection, 在当数据库还没有创建的时候会报错,因此可以先删除相关代码
 创建数据库执行 m:run 后再复原
+
+
+## 开发
+
+```bash
+yarn dev
+# or 
+npm run dev
+```
+
+## 部署
+
+```bash
+ssh blog@dev1 'sh /home/blog/app/bin/deploy.sh'
+```
+
+```bash
+yarn install --production=false
+yarn build
+docker build -t chau/node-web-app .
+docker run --network=host -p 3000:3000 -d chau/node-web-app
+```
