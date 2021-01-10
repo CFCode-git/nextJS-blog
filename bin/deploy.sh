@@ -1,3 +1,4 @@
+echo 'start';
 docker start 2c5 &&
 cd /home/blog/app/ &&
 git pull &&
