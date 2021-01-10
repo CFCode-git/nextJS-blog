@@ -9,7 +9,7 @@ const Home:NextPage = ()=>{
       <div className='cover'>
         <img src="/logo.png" alt=""/>
         <h1>呆尬猴的个人博客 - 测试网站</h1>
-        <p>瞎写一下,以后加内容 yeah!!!</p>
+        <p>瞎写一下,以后加内容123456</p>
         <p><Link href="/posts"><a>文章列表</a></Link></p>
       </div>
       <style jsx>{`
