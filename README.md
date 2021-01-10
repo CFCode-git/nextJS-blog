@@ -66,3 +66,10 @@ yarn build
 docker build -t chau/node-web-app .
 docker run --network=host -p 3000:3000 -d chau/node-web-app
 ```
+
+## 一键部署
+
+```bash
+git push
+ssh blog@dev1 'bash -s' < bin/deploy.sh
+```
